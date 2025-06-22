@@ -12,30 +12,42 @@ struct Home: View {
                 HStack {
                     Image("logo")
                 }
-                .frame(maxWidth: .infinity, maxHeight: 130)
+                .frame(maxWidth: .infinity, maxHeight: 130, alignment: .center)
                 .background(Color.gray700)
-                
-                HStack() {
-                    TextField("Adicione uma nova tarefa", text: $taskTitle)
-                        .textInputAutocapitalization(.never)
-                        .padding(16)
-                        .background(.gray500)
-                        .foregroundStyle(.gray100)
-                        .clipShape(.rect(cornerRadius: 8))
-                    
-                    
-                    Button(action: {}) {
-                        Text("Adicionar")
+                .overlay(
+                    HStack(spacing: 8) {
+                        TextField("", text: $taskTitle, prompt: Text("Adicione uma nova tarefa").foregroundStyle(.gray300))
+                            .textInputAutocapitalization(.never)
                             .padding(16)
-                            .background(.blueDark)
+                            .background(.gray500)
                             .foregroundStyle(.gray100)
                             .clipShape(.rect(cornerRadius: 8))
+                        
+                        
+                        Button(action: {
+                            print("Produto adicionado")
+                        }) {
+                            Image(systemName: "plus")
+                                .font(.title2)
+                                .foregroundStyle(.gray100)
+                                .frame(width: 24, height: 24, alignment: .center)
+                                .padding(16)
+                                .background(Color.blueDark)
+                                .clipShape(.rect(cornerRadius: 8))
+                        }
+                        .frame(width: 48, height: 48, alignment: .center)
                     }
-                }
-                .padding(.horizontal, 24)
+                    .padding(.horizontal, 24)
+                    .shadow(radius: 4)
+                    .offset(y: 25),
+                    alignment: .bottom
+                  
+                )
+                .padding(.bottom, 38)
                 
                 Spacer()
             }
+
         }
     }
 }
