@@ -45,6 +45,13 @@ struct Home: View {
                 )
                 .padding(.bottom, 38)
                 
+                HStack {
+                    Text("Criadas")
+                        .foregroundStyle(.blueLight)
+                    
+                    Text("Concluídas")
+                }
+                
                 Spacer()
             }
 
