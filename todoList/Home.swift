@@ -45,16 +45,38 @@ struct Home: View {
                 )
                 .padding(.bottom, 38)
                 
-                HStack {
+                HStack() {
+                    // Centralizar em um componente
                     Text("Criadas")
                         .foregroundStyle(.blueLight)
                     
+                    Text("0")
+                        .foregroundStyle(.gray200)
+                        .frame(width: 40, height: 24)
+                        .background(
+                            Capsule()
+                                .fill(Color.gray400)
+                        )
+                    
+                    Spacer()
+                    
                     Text("Concluídas")
+                        .foregroundStyle(.purpleLight)
+                    
+                    
+                    Text("33")
+                        .foregroundStyle(.gray200)
+                        .padding(.horizontal, 8)
+                        .frame(width: 40, height: 24)
+                        .background(
+                            Capsule()
+                                .fill(Color.gray400)
+                        )
                 }
+                .padding(24)
                 
                 Spacer()
             }
-
         }
     }
 }
