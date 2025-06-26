@@ -46,32 +46,11 @@ struct Home: View {
                 .padding(.bottom, 38)
                 
                 HStack() {
-                    // Centralizar em um componente
-                    Text("Criadas")
-                        .foregroundStyle(.blueLight)
-                    
-                    Text("0")
-                        .foregroundStyle(.gray200)
-                        .frame(width: 40, height: 24)
-                        .background(
-                            Capsule()
-                                .fill(Color.gray400)
-                        )
+                    TasksLabel(title: "Criadas", taskCounter: 0, primaryColor: true)
                     
                     Spacer()
                     
-                    Text("Concluídas")
-                        .foregroundStyle(.purpleLight)
-                    
-                    
-                    Text("33")
-                        .foregroundStyle(.gray200)
-                        .padding(.horizontal, 8)
-                        .frame(width: 40, height: 24)
-                        .background(
-                            Capsule()
-                                .fill(Color.gray400)
-                        )
+                    TasksLabel(title: "Concluídas", taskCounter: 0, primaryColor: false)
                 }
                 .padding(24)
                 
