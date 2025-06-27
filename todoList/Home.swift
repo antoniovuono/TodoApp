@@ -46,11 +46,11 @@ struct Home: View {
                 .padding(.bottom, 38)
                 
                 HStack() {
-                    TasksLabel(title: "Criadas", taskCounter: 0, primaryColor: true)
+                    TasksLabel(title: "Criadas", taskCounter: 0)
                     
                     Spacer()
                     
-                    TasksLabel(title: "Concluídas", taskCounter: 0, primaryColor: false)
+                    TasksLabel(title: "Concluídas", taskCounter: 20, style: .secondary)
                 }
                 .padding(24)
                 

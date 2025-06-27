@@ -7,17 +7,28 @@
 
 import SwiftUI
 
+enum TasksLabelStyle {
+    case primary, secondary
+    
+    var titleColor: Color {
+        switch self {
+          case .primary: return .blueLight
+          case .secondary: return .purpleLight
+        }
+    }
+}
+
 struct TasksLabel: View {
     let title: String
     let taskCounter: Int
-    let primaryColor: Bool
+    var style: TasksLabelStyle = .primary
     
     var body: some View {
         HStack {
             Text(title)
-                .foregroundStyle(primaryColor ? .blueLight : .purpleLight)
+                .foregroundStyle(style.titleColor)
             
-            Text("0")
+            Text("\(taskCounter)")
                 .foregroundStyle(.gray200)
                 .frame(width: 40, height: 24)
                 .background(
@@ -29,5 +40,6 @@ struct TasksLabel: View {
 }
 
 #Preview {
-    TasksLabel(title: "Concluídas", taskCounter: 1, primaryColor: true)
+    TasksLabel(title: "Concluídas", taskCounter: 1, style: .primary)
 }
+
