@@ -12,8 +12,8 @@ enum TasksLabelStyle {
     
     var titleColor: Color {
         switch self {
-          case .primary: return .blueLight
-          case .secondary: return .purpleLight
+        case .primary: return .blueLight
+        case .secondary: return .purpleLight
         }
     }
 }
@@ -27,6 +27,8 @@ struct TasksLabel: View {
         HStack {
             Text(title)
                 .foregroundStyle(style.titleColor)
+                .font(Typography.primaryBold(size: 14))
+            
             
             Text("\(taskCounter)")
                 .foregroundStyle(.gray200)
