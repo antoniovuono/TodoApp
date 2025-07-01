@@ -52,9 +52,14 @@ struct Home: View {
                     
                     TasksLabel(title: "Concluídas", taskCounter: 20, style: .secondary)
                 }
-                .padding(24)
+                .padding(.vertical, 21)
+                .overlay(
+                    Divider().background(.gray300.opacity(0.4)), alignment: .bottom
+                )
+                .padding(.horizontal, 24)
                 
                 Spacer()
+          
             }
         }
     }
