@@ -32,6 +32,7 @@ struct TasksLabel: View {
             
             Text("\(taskCounter)")
                 .foregroundStyle(.gray200)
+                .font(Typography.primaryBold(size: 12))
                 .frame(width: 40, height: 24)
                 .background(
                     Capsule()

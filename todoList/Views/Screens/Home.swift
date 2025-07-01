@@ -27,7 +27,7 @@ struct Home: View {
                         Button(action: {
                             print("Produto adicionado")
                         }) {
-                            Image(systemName: "plus")
+                            Image(systemName: "plus.circle")
                                 .font(.title2)
                                 .foregroundStyle(.gray100)
                                 .frame(width: 24, height: 24, alignment: .center)
@@ -54,7 +54,7 @@ struct Home: View {
                 }
                 .padding(.vertical, 21)
                 .overlay(
-                    Divider().background(.gray300.opacity(0.4)), alignment: .bottom
+                    Divider().background(.gray300), alignment: .bottom
                 )
                 .padding(.horizontal, 24)
                 
