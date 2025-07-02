@@ -17,7 +17,7 @@ struct Home: View {
                 .overlay(
                     HStack(spacing: 8) {
                         TextInput(placeholder: "Adicione uma nova tarefa", taskTitle: $taskTitle)
-                                            
+                        
                         CreateButton(action: {
                             print("Tarefa criada")
                         }, iconLabel: "plus.circle")
@@ -42,6 +42,10 @@ struct Home: View {
                     Divider().background(.gray300), alignment: .bottom
                 )
                 .padding(.horizontal, 24)
+                
+                VStack() {
+                    EmptyList()
+                }
                 
                 Spacer()
                 
