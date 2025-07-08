@@ -2,7 +2,10 @@ import SwiftUI
 
 struct Home: View {
     var body: some View {
-        @State var taskTitle: String = ""
+        @ObservedObject var taskList = TaskListViewModel()
+        @State  var taskTitle: String = ""
+        @State  var taskCoutner: Int = 2
+        
         
         ZStack {
             Color.gray600
@@ -19,7 +22,9 @@ struct Home: View {
                         TextInput(placeholder: "Adicione uma nova tarefa", taskTitle: $taskTitle)
                         
                         CreateButton(action: {
-                            print("Tarefa criada")
+                            taskList.addTask(title: taskTitle)
+                            taskTitle = ""
+                            
                         }, iconLabel: "plus.circle")
                     }
                         .padding(.horizontal, 24)
@@ -31,11 +36,11 @@ struct Home: View {
                 .padding(.bottom, 38)
                 
                 HStack() {
-                    TasksLabel(title: "Criadas", taskCounter: 0)
+                    TasksLabel(title: "Criadas", taskCounter: taskCoutner)
                     
                     Spacer()
                     
-                    TasksLabel(title: "Concluídas", taskCounter: 20, style: .secondary)
+                    TasksLabel(title: "Concluídas", taskCounter: taskCoutner, style: .secondary)
                 }
                 .padding(.vertical, 21)
                 .overlay(
@@ -44,8 +49,16 @@ struct Home: View {
                 .padding(.horizontal, 24)
                 
                 VStack() {
-                    EmptyList()
+                    if taskCoutner == 0 {
+                        EmptyList()
+                    } else {
+                        ForEach (taskList.tasks) { task in
+                            TaskContent(isTaskCompleted: false, taskTitle: task.title)
+                        }
+                    }
                 }
+                .padding(.horizontal, 24)
+                .padding(.vertical, 12)
                 
                 Spacer()
                 
