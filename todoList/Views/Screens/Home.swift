@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct Home: View {
+    @ObservedObject var taskList = TaskListViewModel()
+    @State  var taskTitle: String = ""
+    @State  var taskCoutner: Int = 2
+    
+    
     var body: some View {
-        @ObservedObject var taskList = TaskListViewModel()
-        @State  var taskTitle: String = ""
-        @State  var taskCoutner: Int = 2
-        
-        
         ZStack {
             Color.gray600
                 .ignoresSafeArea()
@@ -52,8 +52,10 @@ struct Home: View {
                     if taskCoutner == 0 {
                         EmptyList()
                     } else {
-                        ForEach (taskList.tasks) { task in
-                            TaskContent(isTaskCompleted: false, taskTitle: task.title)
+                        ScrollView {
+                            ForEach (taskList.tasks) { task in
+                                TaskContent(isTaskCompleted: false, taskTitle: task.title, deleteTask: { print("Item deletado") })
+                            }
                         }
                     }
                 }

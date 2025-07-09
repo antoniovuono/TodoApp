@@ -10,11 +10,11 @@ import SwiftUI
 struct TaskContent: View {
     var isTaskCompleted: Bool
     var taskTitle: String
-//    let deleteTask: () -> Void
+    let deleteTask: () -> Void
     
     
     var body: some View {
-        HStack (spacing: 12){
+        HStack (spacing: 12) {
             if !isTaskCompleted {
                 Image(systemName: "circle")
                     .foregroundStyle(.blueLight)
@@ -30,14 +30,17 @@ struct TaskContent: View {
                 .foregroundStyle(.gray100)
                 .font(Typography.primaryRegular(size: 14))
                 .lineLimit(2)
-                .multilineTextAlignment(.leading)
                 .truncationMode(.tail)
                 .frame(maxWidth: .infinity)
+                .multilineTextAlignment(.leading)
             
             
-            Image(systemName: "trash")
-                .foregroundStyle(.gray300)
-                .frame(width: 24, height: 24)
+            Button (action: deleteTask, label: {
+                Image(systemName: "trash")
+                    .foregroundStyle(.gray300)
+                    .frame(width: 24, height: 24)
+            }) 
+         
         }
         .padding(.horizontal, 18)
         .padding(.vertical, 12)
@@ -48,6 +51,6 @@ struct TaskContent: View {
 }
 
 #Preview {
-    TaskContent(isTaskCompleted: true, taskTitle: "Exemplo de tarefa")
+    TaskContent(isTaskCompleted: true, taskTitle: "Exemplo de tarefa", deleteTask: { print("Tarefa deletada!") })
         .padding(16)
 }
