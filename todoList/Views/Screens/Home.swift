@@ -4,6 +4,7 @@ struct Home: View {
     @ObservedObject var taskList = TaskListViewModel()
     @State  var taskTitle: String = ""
     @State  var taskCoutner: Int = 2
+    @State var isTextFieldEmpty = true
     
     
     var body: some View {
@@ -18,25 +19,26 @@ struct Home: View {
                 .frame(maxWidth: .infinity, maxHeight: 130, alignment: .center)
                 .background(Color.gray700)
                 .overlay(
-                    HStack(spacing: 8) {
-                        TextInput(placeholder: "Adicione uma nova tarefa", taskTitle: $taskTitle)
+                    HStack(alignment: .top, spacing: 8) {
+                        TextInput(placeholder: "Adicione uma nova tarefa", fieldValidationText: "Você deve dar um título para sua tarefa!" ,isEmpty: taskList.showTextEmptyValidation, taskTitle: $taskTitle)
                         
                         CreateButton(action: {
                             taskList.addTask(title: taskTitle)
                             taskTitle = ""
                             
                         }, iconLabel: "plus.circle")
+                        .padding(4)
                     }
                         .padding(.horizontal, 24)
                         .shadow(radius: 4)
-                        .offset(y: 25),
+                        .offset(y: 55),
                     alignment: .bottom
                     
                 )
                 .padding(.bottom, 38)
                 
                 HStack() {
-                    TasksLabel(title: "Criadas", taskCounter: taskCoutner)
+                    TasksLabel(title: "Criadas", taskCounter: taskList.tasks.count, style: .primary)
                     
                     Spacer()
                     

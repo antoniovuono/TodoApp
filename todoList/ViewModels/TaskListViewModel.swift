@@ -9,10 +9,18 @@ import Foundation
 
 class TaskListViewModel: ObservableObject {
     @Published var tasks: [TaskModel] = []
+    @Published var showTextEmptyValidation: Bool = false
     
     func addTask(title: String) {
-        let newTask = TaskModel(id: UUID(), title: title, isCompleted: false)
+        if(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) {
+            showTextEmptyValidation = true
+            return 
+        }
         
+        let newTask = TaskModel(id: UUID(), title: title, isCompleted: false)
         tasks.append(newTask)
+        showTextEmptyValidation = false
     }
 }
+
+
