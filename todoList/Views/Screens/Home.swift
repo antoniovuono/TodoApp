@@ -56,7 +56,7 @@ struct Home: View {
                     } else {
                         ScrollView {
                             ForEach (taskList.tasks) { task in
-                                TaskContent(isTaskCompleted: false, taskTitle: task.title, deleteTask: { print("Item deletado") })
+                                TaskContent(isTaskCompleted: false, taskTitle: task.title, deleteTask: { taskList.deleteTask(taskId: task.id )})
                             }
                         }
                     }

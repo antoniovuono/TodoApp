@@ -21,6 +21,10 @@ class TaskListViewModel: ObservableObject {
         tasks.append(newTask)
         showTextEmptyValidation = false
     }
+    
+    func deleteTask(taskId: UUID) {
+        tasks.removeAll(where: { $0.id == taskId })
+    }
 }
 
 
