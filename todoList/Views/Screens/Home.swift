@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct Home: View {
-    @ObservedObject var taskList = TaskListViewModel()
+    @ObservedObject var taskTitleViewModel = TaskListViewModel()
     @State  var taskTitle: String = ""
     @State  var taskCoutner: Int = 2
     @State var isTextFieldEmpty = true
@@ -20,10 +20,10 @@ struct Home: View {
                 .background(Color.gray700)
                 .overlay(
                     HStack(alignment: .top, spacing: 8) {
-                        TextInput(placeholder: "Adicione uma nova tarefa", fieldValidationText: "Você deve dar um título para sua tarefa!" ,isEmpty: taskList.showTextEmptyValidation, taskTitle: $taskTitle)
+                        TextInput(placeholder: "Adicione uma nova tarefa", fieldValidationText: "Você deve dar um título para sua tarefa!" ,isEmpty: taskTitleViewModel.showTextEmptyValidation, taskTitle: $taskTitle)
                         
                         CreateButton(action: {
-                            taskList.addTask(title: taskTitle)
+                            taskTitleViewModel.addTask(title: taskTitle)
                             taskTitle = ""
                             
                         }, iconLabel: "plus.circle")
@@ -38,7 +38,7 @@ struct Home: View {
                 .padding(.bottom, 38)
                 
                 HStack() {
-                    TasksLabel(title: "Criadas", taskCounter: taskList.tasks.count, style: .primary)
+                    TasksLabel(title: "Criadas", taskCounter: taskTitleViewModel.tasks.count, style: .primary)
                     
                     Spacer()
                     
@@ -55,8 +55,8 @@ struct Home: View {
                         EmptyList()
                     } else {
                         ScrollView {
-                            ForEach (taskList.tasks) { task in
-                                TaskContent(isTaskCompleted: false, taskTitle: task.title, deleteTask: { taskList.deleteTask(taskId: task.id )})
+                            ForEach (taskTitleViewModel.tasks) { task in
+                                TaskContent(isTaskCompleted: false, taskTitle: task.title, deleteTask: { taskTitleViewModel.deleteTask(taskId: task.id )})
                             }
                         }
                     }
