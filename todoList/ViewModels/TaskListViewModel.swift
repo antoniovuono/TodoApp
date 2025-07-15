@@ -14,7 +14,7 @@ class TaskListViewModel: ObservableObject {
     func addTask(title: String) {
         if(title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) {
             showTextEmptyValidation = true
-            return 
+            return
         }
         
         let newTask = TaskModel(id: UUID(), title: title, isCompleted: false)
@@ -24,6 +24,12 @@ class TaskListViewModel: ObservableObject {
     
     func deleteTask(taskId: UUID) {
         tasks.removeAll(where: { $0.id == taskId })
+    }
+    
+    func toggleTask(taskId: UUID)  {
+        if let index = tasks.firstIndex(where: { $0.id == taskId }) {
+            tasks[index].isCompleted = !tasks[index].isCompleted
+        }
     }
 }
 

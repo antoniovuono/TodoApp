@@ -11,20 +11,23 @@ struct TaskContent: View {
     var isTaskCompleted: Bool
     var taskTitle: String
     let deleteTask: () -> Void
+    let toggleTask: () -> Void
     
     
     var body: some View {
         HStack (spacing: 12) {
-            Group {
-                if !isTaskCompleted {
-                    Image(systemName: "circle")
-                        .foregroundStyle(.blueLight)
-                        .frame(width: 24, height: 24)
-                     
-                } else {
-                    Image(systemName: "checkmark.circle.fill")
-                        .foregroundStyle(.blueLight)
-                        .frame(width: 24, height: 24)
+            Button(action: toggleTask) {
+                Group {
+                    if !isTaskCompleted {
+                        Image(systemName: "circle")
+                            .foregroundStyle(.blueLight)
+                            .frame(width: 24, height: 24)
+                        
+                    } else {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundStyle(.blueLight)
+                            .frame(width: 24, height: 24)
+                    }
                 }
             }
             
@@ -49,7 +52,7 @@ struct TaskContent: View {
                     .foregroundStyle(.gray300)
                     .frame(width: 24, height: 24)
             }) 
-         
+            
         }
         .padding(.horizontal, 18)
         .padding(.vertical, 12)
@@ -60,6 +63,6 @@ struct TaskContent: View {
 }
 
 #Preview {
-    TaskContent(isTaskCompleted: true, taskTitle: "Exemplo de tarefa adicionada!", deleteTask: { print("Tarefa deletada!") })
+    TaskContent(isTaskCompleted: true, taskTitle: "Exemplo de tarefa adicionada!", deleteTask: { print("Tarefa deletada!") }, toggleTask: { print("item completado!") })
         .padding(16)
 }
