@@ -3,7 +3,6 @@ import SwiftUI
 struct Home: View {
     @ObservedObject var taskListViewModel = TaskListViewModel()
     @State  var taskTitle: String = ""
-    @State  var taskCoutner: Int = 2
     @State var isTextFieldEmpty = true
     
     var body: some View {
@@ -19,7 +18,7 @@ struct Home: View {
                 .background(Color.gray700)
                 .overlay(
                     HStack(alignment: .top, spacing: 8) {
-                        TextInput(placeholder: "Adicione uma nova tarefa", fieldValidationText: "Você deve dar um título para sua tarefa!" ,isEmpty: taskListViewModel.showTextEmptyValidation, taskTitle: $taskTitle)
+                        TextInput(placeholder: "Adicione uma nova tarefa", fieldValidationText: "Você deve inserir um título para sua tarefa!" ,isEmpty: taskListViewModel.showTextEmptyValidation, taskTitle: $taskTitle)
                         
                         CreateButton(action: {
                             taskListViewModel.addTask(title: taskTitle)
@@ -41,7 +40,7 @@ struct Home: View {
                     
                     Spacer()
                     
-                    TasksLabel(title: "Concluídas", taskCounter: taskCoutner, style: .secondary)
+                    TasksLabel(title: "Concluídas", taskCounter: taskListViewModel.tasks.count, style: .secondary)
                 }
                 .padding(.vertical, 21)
                 .overlay(
@@ -50,7 +49,7 @@ struct Home: View {
                 .padding(.horizontal, 24)
                 
                 VStack() {
-                    if taskCoutner == 0 {
+                    if taskListViewModel.tasks.count == 0 {
                         EmptyList()
                     } else {
                         ScrollView {
