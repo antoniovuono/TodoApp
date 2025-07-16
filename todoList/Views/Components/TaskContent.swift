@@ -34,13 +34,14 @@ struct TaskContent: View {
             Spacer(minLength: 0)
             
             Text(taskTitle)
-                .foregroundStyle(.gray100)
+                .foregroundStyle(isTaskCompleted ? .gray300 : .gray100)
                 .font(Typography.primaryRegular(size: 14))
                 .lineLimit(2)
                 .truncationMode(.tail)
                 .multilineTextAlignment(.leading)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .layoutPriority(1)
+                .strikethrough(isTaskCompleted ? true : false, color: .gray300)
             
             
             Spacer(minLength: 0)
@@ -63,6 +64,6 @@ struct TaskContent: View {
 }
 
 #Preview {
-    TaskContent(isTaskCompleted: true, taskTitle: "Exemplo de tarefa adicionada!", deleteTask: { print("Tarefa deletada!") }, toggleTask: { print("item completado!") })
+    TaskContent(isTaskCompleted: false, taskTitle: "Exemplo de tarefa adicionada!", deleteTask: { print("Tarefa deletada!") }, toggleTask: { print("item completado!") })
         .padding(16)
 }
