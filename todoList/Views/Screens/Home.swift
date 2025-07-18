@@ -4,6 +4,8 @@ struct Home: View {
     @ObservedObject var taskListViewModel = TaskListViewModel()
     @State  var taskTitle: String = ""
     @State var isTextFieldEmpty = true
+    @State var selectedTasks: TodoType = .created
+    
     
     var body: some View {
         ZStack {
@@ -36,11 +38,7 @@ struct Home: View {
                 .padding(.bottom, 38)
                 
                 HStack() {
-                    TasksLabel(title: "Criadas", taskCounter: taskListViewModel.tasks.count, style: .primary)
-                    
-                    Spacer()
-                    
-                    TasksLabel(title: "Concluídas", taskCounter: taskListViewModel.tasks.count, style: .secondary)
+                    TodoTabBar(selectedTab: $selectedTasks, createdTasksCount: taskListViewModel.cratedTasksCount, finalizedTasksCount: taskListViewModel.finishedTasksCount)
                 }
                 .padding(.vertical, 21)
                 .overlay(
@@ -53,7 +51,7 @@ struct Home: View {
                         EmptyList()
                     } else {
                         ScrollView {
-                            ForEach (taskListViewModel.tasks) { task in
+                            ForEach (selectedTasks == .created ? taskListViewModel.tasks.filter{!$0.isCompleted} : taskListViewModel.tasks.filter{$0.isCompleted}, id: \.id) { task in
                                 TaskContent(isTaskCompleted: task.isCompleted, taskTitle: task.title, deleteTask: { taskListViewModel.deleteTask(taskId: task.id )}, toggleTask: {taskListViewModel.toggleTask(taskId: task.id)})
                             }
                         }

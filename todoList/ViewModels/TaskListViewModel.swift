@@ -31,6 +31,14 @@ class TaskListViewModel: ObservableObject {
             tasks[index].isCompleted = !tasks[index].isCompleted
         }
     }
+    
+    var cratedTasksCount: Int {
+        return tasks.filter({ !$0.isCompleted }).count
+    }
+    
+    var finishedTasksCount: Int {
+        return tasks.filter({ $0.isCompleted }).count
+    }
 }
 
 
